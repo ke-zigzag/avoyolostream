@@ -14,6 +14,8 @@ upload_file = st.file_uploader("Please check your avocado here!", type=["jpg", "
 if upload_file is not None:
     # アップロードされた画像を表示
     image = Image.open(upload_file)
+    #画像を640x640にリサイズ
+    image = image.resize((640, 640))
     st.image(image, caption="Uploaded image", width=250)
 
     # Check Avocadoボタン
@@ -36,12 +38,12 @@ if upload_file is not None:
                     confidence = box.conf.item()
 
                     # バウンディングボックスを描画
-                    color = (255, 0, 0) if label == 'unripe' else (0, 255, 0)
+                    color = (0, 255, 0) if label == 'ripe' else (255, 0, 0) if label == 'unripe' else (128, 0, 128)
                     draw.rectangle([xmin, ymin, xmax, ymax], outline=color, width=2)
 
                     # テキストを描画してクラスラベル名と信用度を表示
                     text = f"{label}: {confidence:.2f}"
-                    font = ImageFont.load_default(24) #フォントサイズを24に設定
+                    font = ImageFont.load_default(30) #フォントサイズを24に設定
                     draw.text((xmin, ymin), text, align='center', fill=color, font=font)
 
             # 結果の画像を表示
