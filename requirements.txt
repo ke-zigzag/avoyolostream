@@ -1,6 +1,4 @@
 streamlit
 ultralytics
-opencv-python==4.9.0.80
 Pillow
-numpy
-matplotlib
+opencv-python-headless
